@@ -2,6 +2,9 @@
 /dist
 /node_modules
 
+# Constants
+src/*/**.constants.ts
+
 # Logs
 logs
 *.log
