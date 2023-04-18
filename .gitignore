@@ -5,6 +5,9 @@
 # Constants
 src/*/**.constants.ts
 
+# Uploads
+uploads/
+
 # Logs
 logs
 *.log
