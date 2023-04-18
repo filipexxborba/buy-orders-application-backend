@@ -10,8 +10,9 @@ import {
 import { BuyOrdersService } from './buy-orders.service';
 import { CreateBuyOrderDto } from './dto/create-buy-order.dto';
 import { UpdateBuyOrderDto } from './dto/update-buy-order.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
+@ApiBearerAuth()
 @ApiTags('Buy Orders')
 @Controller('buy-orders')
 export class BuyOrdersController {
