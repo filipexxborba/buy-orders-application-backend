@@ -6,11 +6,20 @@ import {
   Patch,
   Param,
   Delete,
+  UseInterceptors,
+  UploadedFiles,
 } from '@nestjs/common';
 import { BuyOrdersService } from './buy-orders.service';
 import { CreateBuyOrderDto } from './dto/create-buy-order.dto';
 import { UpdateBuyOrderDto } from './dto/update-buy-order.dto';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger';
+import {
+  AnyFilesInterceptor,
+  FilesInterceptor,
+} from '@nestjs/platform-express';
+import { FilesUploadDto } from './dto/file-upload-dto.dto';
+import { diskStorage } from 'multer';
+import { editFileName, imageFileFilter } from './utils/filesManipulations';
 
 @ApiBearerAuth()
 @ApiTags('Buy Orders')
@@ -31,6 +40,32 @@ export class BuyOrdersController {
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.buyOrdersService.findOne(id);
+  }
+
+  @Post('upload')
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    type: FilesUploadDto,
+  })
+  @UseInterceptors(
+    FilesInterceptor('files', 20, {
+      storage: diskStorage({
+        destination: './uploads',
+        filename: editFileName,
+      }),
+      fileFilter: imageFileFilter,
+    }),
+  )
+  async uploadMultipleFiles(@UploadedFiles() files: Express.Multer.File[]) {
+    const response = [];
+    files.forEach((file) => {
+      const fileReponse = {
+        originalname: file.originalname,
+        filename: file.filename,
+      };
+      response.push(fileReponse);
+    });
+    return response;
   }
 
   @Patch(':id')
