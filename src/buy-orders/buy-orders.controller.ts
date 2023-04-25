@@ -13,10 +13,7 @@ import { BuyOrdersService } from './buy-orders.service';
 import { CreateBuyOrderDto } from './dto/create-buy-order.dto';
 import { UpdateBuyOrderDto } from './dto/update-buy-order.dto';
 import { ApiBearerAuth, ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger';
-import {
-  AnyFilesInterceptor,
-  FilesInterceptor,
-} from '@nestjs/platform-express';
+import { FilesInterceptor } from '@nestjs/platform-express';
 import { FilesUploadDto } from './dto/file-upload-dto.dto';
 import { diskStorage } from 'multer';
 import { editFileName, imageFileFilter } from './utils/filesManipulations';
