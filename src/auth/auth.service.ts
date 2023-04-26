@@ -37,6 +37,6 @@ export class AuthService {
       isActive: user.isActive,
     };
 
-    return { acess_token: this.jwtService.sign(payload) };
+    return { access_token: this.jwtService.sign(payload) };
   }
 }
