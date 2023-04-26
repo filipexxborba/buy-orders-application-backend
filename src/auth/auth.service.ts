@@ -15,7 +15,6 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-
   async signIn(signInDto: SignInDto) {
     const user = await this.userService.findByEmail(signInDto.email);
     if (!user)
@@ -37,6 +36,15 @@ export class AuthService {
       isActive: user.isActive,
     };
 
-    return { access_token: this.jwtService.sign(payload) };
+    return { access_token: this.jwtService.sign(payload), user };
+  }
+
+  async validate(token: string) {
+    try {
+      const verify = await this.jwtService.verify(token);
+      return verify;
+    } catch (error) {
+      throw new UnauthorizedException({ ...error });
+    }
   }
 }
