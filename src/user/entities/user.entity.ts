@@ -1,6 +1,5 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { UserRole } from '../../@types/UserRoleEnum.type';
-import mongoose from 'mongoose';
 
 @Schema()
 export class User {
@@ -34,6 +33,12 @@ export class User {
 
   @Prop()
   isActive: boolean;
+
+  @Prop()
+  refreshToken: string;
+
+  @Prop()
+  refreshTokenExpiresAt: Date;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

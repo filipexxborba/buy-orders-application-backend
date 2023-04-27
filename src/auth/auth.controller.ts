@@ -17,12 +17,30 @@ export class AuthController {
     response
       .status(200)
       .cookie('jwt-orders-auth-token', data.access_token)
+      .cookie('jwt-orders-auth-refresh-token', data.refresh_token)
       .send(data);
   }
 
   @Public()
   @Post('validate')
   async validate(@Body() tokenValidateDto: TokenValidateDto) {
-    return this.authService.validate(tokenValidateDto.token);
+    return this.authService.validateJWTToken(tokenValidateDto.token);
+  }
+
+  @Public()
+  @Post('refresh-token')
+  async validateRefreshToken(
+    @Body() tokenValidateDto: TokenValidateDto,
+    @Res() response,
+  ) {
+    const data = await this.authService.validateRefreshToken(
+      tokenValidateDto.token,
+      tokenValidateDto.refreshToken,
+    );
+    response
+      .status(200)
+      .cookie('jwt-orders-auth-token', data.access_token)
+      .cookie('jwt-orders-auth-refresh-token', data.refresh_token)
+      .send(data);
   }
 }
