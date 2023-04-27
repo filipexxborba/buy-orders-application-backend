@@ -6,4 +6,10 @@ export class TokenValidateDto {
     type: String,
   })
   token: string;
+
+  @ApiProperty({
+    title: 'Refresh Token',
+    type: String,
+  })
+  refreshToken?: string;
 }
