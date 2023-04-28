@@ -1,9 +1,9 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { UserRole } from '../../@types/UserRoleEnum.type';
+import { CostCentersEnum } from 'src/@types/CostCenter.type';
 
 @Schema()
 export class User {
-
   @Prop()
   name: string;
 
@@ -21,6 +21,11 @@ export class User {
     enum: Object.values(UserRole),
   })
   role: UserRole;
+
+  @Prop({
+    enum: Object.values(CostCentersEnum),
+  })
+  costCenter: CostCentersEnum;
 
   @Prop()
   imageUri: string;
