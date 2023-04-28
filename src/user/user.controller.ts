@@ -12,6 +12,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { Public } from '../auth/publicKey.metadata';
+import { UserRole } from '../@types/UserRoleEnum.type';
 
 @ApiBearerAuth()
 @ApiTags('User')
@@ -33,6 +34,11 @@ export class UserController {
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.userService.findOne(id);
+  }
+
+  @Get('/role/:role')
+  findByRole(@Param('role') role: UserRole) {
+    return this.userService.findByRole(role);
   }
 
   @Patch(':id')

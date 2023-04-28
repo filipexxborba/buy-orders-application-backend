@@ -10,6 +10,7 @@ import * as bcrypt from 'bcrypt';
 import { User } from './entities/user.entity';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
+import { UserRole } from '../@types/UserRoleEnum.type';
 
 @Injectable()
 export class UserService {
@@ -49,6 +50,10 @@ export class UserService {
 
   async findByEmail(email: string) {
     return await this.userModel.findOne({ email: email }).exec();
+  }
+
+  async findByRole(role: UserRole) {
+    return await this.userModel.find({ role: role }).exec();
   }
 
   async update(id: string, updateUserDto: UpdateUserDto) {
