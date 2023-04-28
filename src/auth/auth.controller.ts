@@ -43,4 +43,14 @@ export class AuthController {
       .cookie('jwt-orders-auth-refresh-token', data.refresh_token)
       .send(data);
   }
+
+  @Public()
+  @Get('logout')
+  async logout(@Res() response) {
+    response
+      .status(200)
+      .cookie('jwt-orders-auth-token', '0')
+      .cookie('jwt-orders-auth-refresh-token', '0')
+      .send({ message: 'Logged out successfully' });
+  }
 }

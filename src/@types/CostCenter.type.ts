@@ -1,10 +1,10 @@
 export enum CostCentersEnum {
-  TI = 'ti',
-  FINANCIER = 'financier',
-  COMEX = 'comex',
-  CC = 'cc',
-  HR = 'hr',
-  CONTABILITY = 'contability',
-  LOGISTICS = 'logistics',
-  CA = 'ca',
+  TI = 'T.I.',
+  FINANCIER = 'Financeiro',
+  COMEX = 'Comex',
+  CC = 'C&C',
+  HR = 'Recursos Humanos',
+  CONTABILITY = 'Contabilidade',
+  LOGISTICS = 'Logística',
+  CA = 'ADM Comercial',
 }
